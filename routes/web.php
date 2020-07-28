@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('items.index');
-})->name('start');
+Route::get('/','FrontendController@home')->name('home');
+
+
+
+Route::get('dashboard', 'BackendController@dashboard')->name('dashboard');
+
+Route::resource('items','ItemController');//for crud
