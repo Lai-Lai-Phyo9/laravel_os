@@ -23,7 +23,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return 'Create Page Here!';
+        return view ('backend.items.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.items.show');
     }
 
     /**
@@ -56,7 +56,7 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view ('backend.items.edit');
     }
 
     /**
