@@ -1,0 +1,7 @@
+homework
+............
+	CRUD	
+	- custom input validation errors
+	- image upload in update process
+	- delete images from storage if changes
+	

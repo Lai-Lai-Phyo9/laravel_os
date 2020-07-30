@@ -21,8 +21,10 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->integer('discount');//10%
             $table->text('description');
+            //fk
             $table->unsignedBigInteger('brand_id');//id in brand table
             $table->unsignedBigInteger('subcategory_id');
+
             $table->timestamps();
 
             $table->foreign('brand_id')

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Item;
+use App\Brand;
+use App\Subcategory;
 
 class ItemController extends Controller
 {
@@ -13,7 +16,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-       return view ('backend.items.index');
+      $items=Item::all();
+      // dd($items);
+      return view ('backend.items.index',compact('items'));
     }
 
     /**
@@ -23,7 +28,10 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view ('backend.items.create');
+      $brands =Brand::all();
+      $subcategories=Subcategory::all();
+
+      return view ('backend.items.create',compact('brands','subcategories'));
     }
 
     /**
@@ -33,8 +41,43 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        //print output
+        // dd($request);
+
+        //Validation
+        $request->validate([
+            'codeno' => 'required',
+            'name' => 'required',
+            'photo' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+            'brand' => 'required',
+            'subcategory' => 'required',
+        ]);
+
+        //File Upload
+        $imageName=time().'.'.$request->photo->extension();
+        $request->photo->move(public_path('backendtemplate/itemimg'),$imageName);
+        $myfile='backendtemplate/itemimg/'.$imageName;
+
+        //Store Data
+        $item=new Item;
+        $item->codeno=$request->codeno; //->name in modeltable =->name in form
+        $item->name=$request->name;
+        $item->photo=$myfile;
+        $item->price=$request->price;
+        $item->discount=$request->discount;
+        $item->description=$request->description;
+        $item->brand_id=$request->brand;
+        $item->subcategory_id=$request->subcategory;
+        $item->save();
+
+        //Redirect
+        return redirect()->route('items.index');
+
+
     }
 
     /**
@@ -56,7 +99,11 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        return view ('backend.items.edit');
+      $brands =Brand::all();
+      $subcategories=Subcategory::all();
+      $item=Item::find($id);
+      // dd($item);
+      return view ('backend.items.edit',compact('brands','subcategories','item'));
     }
 
     /**
@@ -68,8 +115,42 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+         //print output
+        // dd($request);
+
+        //Validation
+        $request->validate([
+            'codeno' => 'required',
+            'name' => 'required',
+            'photo' => 'required',
+            //may be present or absent , check validation
+            'price' => 'required',
+            'discount' => 'required',
+            'description' => 'required',
+            'brand' => 'required',
+            'subcategory' => 'required',
+        ]);
+
+        //File Upload
+        $imageName=time().'.'.$request->photo->extension();
+        $request->photo->move(public_path('backendtemplate/itemimg'),$imageName);
+        $myfile='backendtemplate/itemimg/'.$imageName;
+        //if upload new image, delete old image
+
+        //Update Data
+        $item=Item::find($id);
+        $item->codeno=$request->codeno; //->name in modeltable =->name in form
+        $item->name=$request->name;
+        $item->photo=$myfile;
+        $item->price=$request->price;
+        $item->discount=$request->discount;
+        $item->description=$request->description;
+        $item->brand_id=$request->brand;
+        $item->subcategory_id=$request->subcategory;
+        $item->save();
+
+        //Redirect
+        return redirect()->route('items.index');    }
 
     /**
      * Remove the specified resource from storage.
@@ -79,6 +160,9 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item=Item::find($id);
+        //delete related file from storage
+        $item->delete();
+        return redirect()->route('items.index');
     }
 }
