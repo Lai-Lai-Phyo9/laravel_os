@@ -19,24 +19,36 @@
 			<label for="inputCodeNo" class="col-sm-2 col-form-label">Codeno</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="inputCodeNo" name="codeno">
+				@error('codeno')
+				<span class="text-danger">{{$message}}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputName" class="col-sm-2 col-form-label">Name</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="inputName" name="name">
+				@error('name')
+				<span class="text-danger">{{$message}}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputPhoto" class="col-sm-2 col-form-label">Photo</label>
 			<div class="col-sm-10">
 				<input type="file" class="form-control" id="inputPhoto" name="photo">
+				@error('photo')
+				<span class="text-danger">{{$message}}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
 			<div class="col-sm-10">
 				<input type="number" class="form-control" id="inputPrice" name="price">
+				@error('price')
+				<span class="text-danger">{{$message}}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group row">
@@ -49,6 +61,9 @@
 			<label for="inputDescription" class="col-sm-2 col-form-label">Description</label>
 			<div class="col-sm-10">
 				<textarea class="form-control" id="inputDescription" name="description"></textarea>
+				@error('description')
+				<span class="text-danger">{{$message}}</span>
+				@enderror
 			</div>
 		</div>
 		<div class="form-group row">

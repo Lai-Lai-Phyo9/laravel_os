@@ -27,45 +27,30 @@
 
   <!-- Content Row -->
   <div class="row">
+    @foreach ($items as $item)
     <div class="col-md-4 mb-5">
       <div class="card h-100">
         <div class="card-body">
-          <h2 class="card-title">Card One</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+          <h2 class="card-title">{{$item->name}}</h2>
+          <img src="{{$item->photo}}" style="width: 50%; height: 50%;">
+          <p class="card-text">{{$item->price}}MMK</p>
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          <a href="{{ route('itemdetail',$item->id) }}" class="btn btn-primary btn-sm">More Info</a>
+          <a href="#" class="btn btn-secondary btn-sm">Add to cart</a>
         </div>
       </div>
     </div>
-    <!-- /.col-md-4 -->
-    <div class="col-md-4 mb-5">
-      <div class="card h-100">
-        <div class="card-body">
-          <h2 class="card-title">Card Two</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-        </div>
-        <div class="card-footer">
-          <a href="#" class="btn btn-primary btn-sm">More Info</a>
-        </div>
-      </div>
-    </div>
-    <!-- /.col-md-4 -->
-    <div class="col-md-4 mb-5">
-      <div class="card h-100">
-        <div class="card-body">
-          <h2 class="card-title">Card Three</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-        </div>
-        <div class="card-footer">
-          <a href="#" class="btn btn-primary btn-sm">More Info</a>
-        </div>
-      </div>
-    </div>
+    @endforeach
     <!-- /.col-md-4 -->
 
   </div>
   <!-- /.row -->
 
 </div>
+@endsection
+@section('script')
+  <script type="text/javascript" src="{{ asset('frontendtemplate/js/custom.js') }}">
+    
+  </script>
 @endsection

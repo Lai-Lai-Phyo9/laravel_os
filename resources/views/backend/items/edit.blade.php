@@ -33,8 +33,10 @@
 			<div class="col-sm-10">
 				<input type="file" class="form-control" id="inputPhoto" name="photo">
 				<img src="{{ asset($item->photo) }}" width="100" height="100">
+				<input type="hidden" name="old_photo" value="{{$item->photo}}">
 			</div>
 		</div>
+		
 		<div class="form-group row">
 			<label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
 			<div class="col-sm-10">

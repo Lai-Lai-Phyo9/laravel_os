@@ -13,6 +13,7 @@
   <!-- Bootstrap core CSS -->
   <link href="{{ asset('frontendtemplate/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
+  <link href="{{ asset('backendtemplate/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template -->
   <link href="{{ asset('frontendtemplate/css/small-business.css')}}" rel="stylesheet">
 
@@ -43,6 +44,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Contact</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -63,6 +67,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{ asset('frontendtemplate/vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{ asset('frontendtemplate/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  @yield('script')
 
 </body>
 

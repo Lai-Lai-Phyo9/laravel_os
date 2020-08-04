@@ -88,7 +88,8 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        return view('backend.items.show');
+        $item=Item::find($id);//obj
+        return view('backend.items.show',compact('item'));
     }
 
     /**
@@ -122,7 +123,7 @@ class ItemController extends Controller
         $request->validate([
             'codeno' => 'required',
             'name' => 'required',
-            'photo' => 'required',
+            'photo' => 'nullable',
             //may be present or absent , check validation
             'price' => 'required',
             'discount' => 'required',
@@ -132,10 +133,23 @@ class ItemController extends Controller
         ]);
 
         //File Upload
-        $imageName=time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('backendtemplate/itemimg'),$imageName);
-        $myfile='backendtemplate/itemimg/'.$imageName;
+        // $imageName=time().'.'.$request->photo->extension();
+        // $request->photo->move(public_path('backendtemplate/itemimg'),$imageName);
+        // $myfile='backendtemplate/itemimg/'.$imageName;
+
         //if upload new image, delete old image
+        $myfile=$request->old_photo;
+        if($request->hasfile('photo'))
+        {
+            $imageName=time().'.'.$request->photo->extension();
+            $name=$request->old_photo;
+
+            if(file_exists(public_path($name))){
+                unlink(public_path($name));
+                $request->photo->move(public_path('backendtemplate/itemimg'),$imageName);
+                $myfile='backendtemplate/itemimg/'.$imageName;
+            }
+        }
 
         //Update Data
         $item=Item::find($id);
@@ -149,8 +163,12 @@ class ItemController extends Controller
         $item->subcategory_id=$request->subcategory;
         $item->save();
 
+
+
+
         //Redirect
-        return redirect()->route('items.index');    }
+        return redirect()->route('items.index');    
+    }
 
     /**
      * Remove the specified resource from storage.

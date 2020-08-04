@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','FrontendController@home')->name('home');
 
 
+Route::get('itemdetail/{item}','FrontendController@itemdetail')->name('itemdetail');
+Route::get('cart','FrontendController@cart')->name('cart');
 
 Route::get('dashboard', 'BackendController@dashboard')->name('dashboard');
 

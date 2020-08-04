@@ -392,6 +392,8 @@
   <script src="{{ asset('backendtemplate/js/demo/chart-area-demo.js')}}"></script>
   <script src="{{ asset('backendtemplate/js/demo/chart-pie-demo.js')}}"></script>
 
+  @yield('script')
+
 </body>
 
 </html>
